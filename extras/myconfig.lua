@@ -79,13 +79,34 @@ config.use_terms_checkboxes = {
   
 -- Absolute base url of application
 -- ------------------------------------------------------------------------
-config.absolute_base_url = "/"
+config.absolute_base_url = "/cert"
 
 
 -- Connection information for the LiquidFeedback database
 -- ------------------------------------------------------------------------
-config.database = { engine='postgresql', dbname='parelon_cert' }
-config.secure_database = { engine='postgresql', dbname='parelon_cert' }
+--config.database = { engine='postgresql', dbname='parelon_cert' }
+--config.secure_database = { engine='postgresql', dbname='parelon_cert' }
+config.database = {
+  engine='postgresql', 
+  dbname='parelon_cert', 
+  conninfo='',
+  host='ParelonDB',
+  hostaddr='localhost',
+  port='5432',
+  user='ssh-tunnel',
+  password='Pr0g3tt0P_@r3loN'
+}
+
+config.secure_database = { 
+  engine='postgresql', 
+  dbname='parelon_cert', 
+  conninfo='',
+  host='ParelonDB',
+  hostaddr='localhost',
+  port='5432',
+  user='ssh-tunnel',
+  password='Pr0g3tt0P_@r3loN'
+}
 
 -- Location of the rocketwiki binaries
 -- ------------------------------------------------------------------------

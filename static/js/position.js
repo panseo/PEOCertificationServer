@@ -1,6 +1,6 @@
 function set_login_position(service_url) {
   $(window).load(function(){
-//    alert("trace: set_login_position(): url="+service_url);
+    //alert("trace: set_login_position(): url="+service_url);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         function success(position) {
@@ -23,7 +23,7 @@ function set_login_position(service_url) {
 
 function codelatlng(lat,lng,id,str) {
   $(window).load(function(){
-//    alert("trace: codeLatLng(): lat:"+lat+" lng:"+lng+" Element id:"+id+" String: \""+str+"\"");
+    //alert("trace: codeLatLng(): lat:"+lat+" lng:"+lng+" Element id:"+id+" String: \""+str+"\"");
     $.ajax({
       type: "GET",
       url: "http://maps.googleapis.com/maps/api/geocode/json",
