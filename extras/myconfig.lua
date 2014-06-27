@@ -89,23 +89,17 @@ config.absolute_base_url = "/cert"
 config.database = {
   engine='postgresql', 
   dbname='parelon_cert', 
-  conninfo='',
-  host='ParelonDB',
-  hostaddr='localhost',
+  hostaddr='127.0.0.1',
   port='5432',
-  user='ssh-tunnel',
-  password='Pr0g3tt0P_@r3loN'
+  user='www-data'
 }
 
 config.secure_database = { 
   engine='postgresql', 
   dbname='parelon_cert', 
-  conninfo='',
-  host='ParelonDB',
-  hostaddr='localhost',
+  hostaddr='127.0.0.1',
   port='5432',
-  user='ssh-tunnel',
-  password='Pr0g3tt0P_@r3loN'
+  user='www-data'
 }
 
 -- Location of the rocketwiki binaries
