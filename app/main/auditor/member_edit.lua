@@ -13,7 +13,7 @@ ui.script{static = "js/jquery.validate.js" }
 local confirm_box1 = param.get("confirm_box1",atom.boolean)
 local confirm_box2 = param.get("confirm_box2",atom.boolean)
 local confirm_box3 = param.get("confirm_box3",atom.boolean)
-local confirm_box4 = param.get("confirm_box4",atom.boolean)
+--local confirm_box4 = param.get("confirm_box4",atom.boolean)
 local confirm_box5 = param.get("confirm_box5",atom.boolean)
 local confirm_box6 = param.get("confirm_box6",atom.boolean)
 local confirm_box7 = param.get("confirm_box7",atom.boolean)
@@ -22,7 +22,7 @@ if ( not member or not member_data ) and
   (confirm_box1 ~= true or 
    confirm_box2 ~= true or 
    confirm_box3 ~= true or 
-   confirm_box4 ~= true or 
+   --confirm_box4 ~= true or 
    confirm_box5 ~= true or 
    confirm_box6 ~= true or
    confirm_box7 ~= true ) then
@@ -77,7 +77,7 @@ if ( not member or not member_data ) and
               ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"E' (o era) presente fisicamente insieme a te al momento della registrazione e il suo aspetto fisico corrisponde alla Foto e alla Descrizione del Documento di Identita' presentato", name = "confirm_box1" }
               ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"Dichiara di essere cittadino Italiano maggiorenne", name = "confirm_box2" }
               ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"Dichiara di essere cittadino con la residenza (indicata dal documento di identita') nella stessa regione/comune/municipio dove e'  attivo il Parlamento Elettronico Online", name = "confirm_box3" }
-              ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"Dichiara di essere utente registrato e certificato sul sito http://www.beppegrillo.it/movimento/", name = "confirm_box4" }
+              --ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"Dichiara di essere utente registrato e certificato sul sito http://www.beppegrillo.it/movimento/", name = "confirm_box4" }
               ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"Dichiara di possedere l'indirizzo email che fornira' al sistema", name = "confirm_box5" }
               ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"Dichiara avere un Documento di Identita' valido", name = "confirm_box6" }
               ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"Dichiara di avere con se la Tessera del Codice Fiscale o la Tessera Sanitaria con indicato il CF", name = "confirm_box7" }
@@ -149,7 +149,7 @@ ui.container{ attr = { class = "row-fluid spaceline2" }, content = function()
         ui.field.hidden{name="confirm_box1", value=confirm_box1 or false}
         ui.field.hidden{name="confirm_box2", value=confirm_box2 or false}
         ui.field.hidden{name="confirm_box3", value=confirm_box3 or false}
-        ui.field.hidden{name="confirm_box4", value=confirm_box4 or false}
+        --ui.field.hidden{name="confirm_box4", value=confirm_box4 or false}
         ui.field.hidden{name="confirm_box5", value=confirm_box5 or false}
         ui.field.hidden{name="confirm_box6", value=confirm_box6 or false}
         ui.field.hidden{name="confirm_box7", value=confirm_box7 or false}
