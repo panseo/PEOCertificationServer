@@ -44,8 +44,10 @@ if config.locked_profile_fields == nil then
   config.locked_profile_fields = {}
 end
 
-if not config.database then
-  config.database = { engine='postgresql', dbname='liquid_feedback' }
+--if not config.database then
+--  config.database = { engine='postgresql', dbname='liquid_feedback' }
+if not config.secure_database or not config.database then
+  error('Database connection not set.')
 end
 
 if not config.enable_debug_trace then
@@ -58,8 +60,9 @@ end
 request.set_404_route{ module = 'index', view = '404' }
 
 -- open and set default database handle
-db = assert(mondelefant.connect(config.database))
+db = assert( mondelefant.connect(config.secure_database) )
 secure_db = assert( mondelefant.connect(config.secure_database) )
+
 at_exit(function() 
   secure_db:close()
   db:close()

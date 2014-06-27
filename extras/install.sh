@@ -1,13 +1,13 @@
-#/bin/bash
+#!/bin/bash
 
-FRONTENDSRC=/opt/ParelonCertFrontend
-WEBMCPSRC=/opt/ParelonCertFrontend/extras/webmcp
-FRONTENDDST=/opt/liquid_feedback_frontend
+FRONTENDSRC=/opt/PEOCertificationServer #/opt/ParelonCertFrontend
+WEBMCPSRC=/opt/ParlamentoElettronicoM5S/extras/webmcp #/opt/ParelonCertFrontend/extras/webmcp
+FRONTENDDST=/opt/liquid_feedback_frontend_cert
 WEBMCPDST=/opt/webmcp
 HELPDIR=${FRONTENDDST}/locale/help/
 ROCKETWIKICMD=/opt/rocketwiki-lqfb/rocketwiki-lqfb
-CONFIGFILE=/opt/ParelonCertFrontend/extras/myconfig.lua
-INITFILE=/opt/ParelonCertFrontend/extras/init.lua
+CONFIGFILE=/opt/PEOCertificationServer/extras/myconfig.lua #/opt/ParelonCertFrontend/extras/myconfig.lua
+INITFILE=/opt/PEOCertificationServer/extras/init.lua #/opt/ParelonCertFrontend/extras/init.lua
 HTTPDUSER=www-data
 
 if [ "z$(id -u)" != "z0" ];then
@@ -32,7 +32,7 @@ done
 export LANG=en_US.UTF-8
 
 if [ "z${fast}" == "zyes" ]; then
-   cp -a ${FRONTENDSRC}/{app,db,env,fastpath,locale,model,static,utils} ${FRONTENDDST}/
+   cp -ar $FRONTENDSRC/{app,db,env,fastpath,locale,model,static,utils} ${FRONTENDDST}/
    echo "Fast copy done"
    exit 0
 fi
@@ -117,7 +117,7 @@ if ! [ -d "${WEBMCPDST}" ]; then
 fi
 
 echo "Installing Frontend..."
-cp -a ${FRONTENDSRC}/{app,db,env,fastpath,locale,model,static,tmp,utils} ${FRONTENDDST}
+cp -a $FRONTENDSRC/{app,db,env,fastpath,locale,model,static,tmp,utils} ${FRONTENDDST}
 mkdir -p ${FRONTENDDST}/config/
 cp ${FRONTENDSRC}/config/init.lua ${FRONTENDDST}/config/
 
@@ -143,12 +143,6 @@ echo "Converting help files with rocketwiki..."
 find ${FRONTENDDST}/locale/help/ -name "*.txt" | while read file; do
         cat ${file} |iconv -f utf-8| ${ROCKETWIKICMD} >  ${file}.html
 done
-
-echo "Compiling lf_update and lf_update_suggestion_order..."
-cd ${COREDST} 
-make clean
-make
-cd -
 
 echo "Cleaining..."
 cd ${WEBMCPSRC}
