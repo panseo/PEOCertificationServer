@@ -9,9 +9,9 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
     end }
     ui.container{ attr = { class = "row-fluid text-center" }, content = function()
 
-      ui.container{ attr = { class  = "inline-block", style = "margin: 5px;" }, content = function()
+      ui.container{ attr = { class  = "span3" }, content = function()
         ui.link{
-          attr = { class="btn btn-primary btn-large table-cell"  },
+          attr = { class="btn btn-primary btn-large small_btn"  },
           module = "auditor",
           view = "download",
           content = function()
@@ -19,9 +19,9 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
           end
         }
       end }
-      ui.container{ attr = { class  = "inline-block" , style = "margin: 5px;" }, content = function()
+      ui.container{ attr = { class  = "span3" }, content = function()
         ui.link{
-          attr = { class="btn btn-primary btn-large table-cell fixclick"  },
+          attr = { class="btn btn-primary btn-large small_btn"  },
           module = "auditor",
           view = "member_edit",
           content = function()
@@ -29,9 +29,9 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
           end
         }
       end }
-      ui.container{ attr = { class  = "inline-block" , style = "margin: 5px;" }, content = function()
+      ui.container{ attr = { class  = "span3" }, content = function()
         ui.link{
-          attr = { class="btn btn-primary btn-large table-cell fixclick"  },
+          attr = { class="btn btn-primary btn-large small_btn"  },
           module = "member",
           view = "settings_password",
           content = function()
@@ -39,9 +39,9 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
           end
         }
       end }
-      ui.container{ attr = { class  = "inline-block" , style = "margin: 5px;" }, content = function()
+      ui.container{ attr = { class  = "span3" }, content = function()
         ui.link{
-          attr = { class="btn btn-primary btn-large table-cell fixclick"  },
+          attr = { class="btn btn-primary btn-large small_btn"  },
           module = "index",
           action = "logout",
           content = function()
