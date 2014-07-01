@@ -112,6 +112,8 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
         attr = { class="btn btn-primary proc_btn fixclick"  },
         module = "auditor",
         view = "index",
+        action = "generate_new_password",
+        id = id,
         content = function()
           ui.container{ attr = { class = "proc_btn table-cell" }, content = function()
             ui.heading{level=5,content=_"Generate a new password" }
