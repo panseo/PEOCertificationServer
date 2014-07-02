@@ -35,7 +35,7 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
 
 
         local active
-        if not member.active then
+        if not member.activated then
           active=_"Not activated"
         elseif not member.active then
           active= _"INACTIVE"

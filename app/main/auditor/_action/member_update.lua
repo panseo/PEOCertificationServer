@@ -245,10 +245,7 @@ if mderr then
   return false
 end
 
-
---if not member.activated and param.get("invite_member", atom.boolean) then
-  member:send_invitation()
---end
+member:send_invitation()
 
 if id then
   slot.put_into("notice", _"Member successfully updated")
