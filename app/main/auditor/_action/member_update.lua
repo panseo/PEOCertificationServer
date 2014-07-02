@@ -245,6 +245,26 @@ if mderr then
   return false
 end
 
+-- Create new privileges: the new member inherits them from the auditor
+
+if not member.activated then
+	local auditor_privileges = Privilege:new_selector()
+		:add_where("member_id = " .. app.session.member_id)
+		:exec()
+		
+	for i, auditor in ipairs(auditor_privileges) do
+		privilege = Privilege:new()
+		privilege.unit_id = auditor.unit_id
+		privilege.member_id = member.id
+		privilege.voting_right = true
+		local mderr = privilege:try_save()
+		if mderr then
+			slot.put_into("error", (_("Error while updating member sensitive data, database reported:<br /><br /> (#{errormessage})"):gsub("#{errormessage}", tostring(mderr.message))))
+			return false
+		end
+	end
+end
+
 member:send_invitation()
 
 if id then
