@@ -173,6 +173,7 @@ local email = param.get("email")
 if email then
   if #email >=6 then
     member_data.email = email
+    member.notify_email_unconfirmed = email
   else
     slot.put_into("error", _"User e-mail address is too short!")
     return false
@@ -245,9 +246,9 @@ if mderr then
 end
 
 
-if not member.activated and param.get("invite_member", atom.boolean) then
+--if not member.activated and param.get("invite_member", atom.boolean) then
   member:send_invitation()
-end
+--end
 
 if id then
   slot.put_into("notice", _"Member successfully updated")

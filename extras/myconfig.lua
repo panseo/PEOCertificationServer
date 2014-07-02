@@ -4,7 +4,7 @@
 
 -- Name of this instance, defaults to name of config file
 -- ------------------------------------------------------------------------
-config.instance_name = "Parlamento Elettronico Movimento Cinque Stelle"
+config.instance_name = "Parlamento Elettronico Online"
 
 
 -- Information about service provider (HTML)
@@ -150,7 +150,7 @@ config.default_lang = "it"
 
 -- Prefix of all automatic mails, defaults to "[Liquid Feedback] "
 -- ------------------------------------------------------------------------
-config.mail_subject_prefix = "Parlamento Elettronico M5S "
+config.mail_subject_prefix = "Parlamento Elettronico Online "
 
 -- Sender of all automatic mails, defaults to system defaults
 -- ------------------------------------------------------------------------

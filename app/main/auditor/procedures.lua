@@ -35,7 +35,7 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
 
 
         local active
-        if not member.activated then
+        if not member.active then
           active=_"Not activated"
         elseif not member.active then
           active= _"INACTIVE"
@@ -136,6 +136,8 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
         attr = { class="btn btn-primary proc_btn fixclick"  },
         module = "auditor",
         view = "index",
+        action = "generate_new_invite_code",
+        id = member.id,
         content = function()
           ui.container{ attr = { class = "proc_btn table-cell" }, content = function()
             ui.heading{level=5,content=_"Send email with activation code" }
