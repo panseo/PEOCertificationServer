@@ -113,7 +113,6 @@ local token_serial = param.get("token_serial")
 if token_serial then
   if #token_serial >=8 then
     member_data.token_serial = token_serial
-    member.identification = token_serial
   else
     slot.put_into("error", _"User token serial number is too short!")
     return false
