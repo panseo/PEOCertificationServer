@@ -7,7 +7,7 @@ if not member then
 	return
 end
 
-member:send_invitation()
+local result = member:send_invitation()
 
 trace.debug("result: "..result)
 
