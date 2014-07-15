@@ -428,6 +428,10 @@ end
 
 function Member.object:send_invitation(template_file, subject)
   trace.disable()
+  self.invite_code = ""
+  self.invite_code_expiry = ""
+  self:save()
+  
   self.invite_code = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
   self.invite_code_expiry = db:query("SELECT now() + '1 days'::interval as expiry", "object").expiry
   self:save()
@@ -456,7 +460,7 @@ function Member.object:send_invitation(template_file, subject)
   local success = net.send_mail{
     envelope_from = config.mail_envelope_from,
     from          = config.mail_from,
-    reply_to      = config.mail_reply_to,
+--    reply_to      = config.mail_reply_to,
     to            = #self.notify_email_unconfirmed>0 and self.notify_email_unconfirmed or self.notify_email,
     subject       = subject,
     content_type  = "text/plain; charset=UTF-8",
