@@ -250,7 +250,7 @@ ui.container{ attr = { class = "row-fluid spaceline2" }, content = function()
         	label = _"Eletto",
         	label_attr={class="auditor_input_label"},
         	container_attr={class="control-group"},
-          attr={class="auditor_input"},
+          attr={class="auditor_input",placeholder=_"Elected"},
           style = "checkbox",
           value = param.get("elected",atom.boolean)
         }

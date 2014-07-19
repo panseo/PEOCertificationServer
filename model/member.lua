@@ -429,7 +429,7 @@ end
 function Member.object:send_invitation(template_file, subject)
   trace.disable()
   self.invite_code = ""
-  self.invite_code_expiry = ""
+  self.invite_code_expiry = db:query("SELECT now()","object").expiry 
   self:save()
   
   self.invite_code = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
@@ -458,7 +458,7 @@ function Member.object:send_invitation(template_file, subject)
   end
   
 	local address
-	if self.notify_email_unconfirmed ~= "" then
+	if self.notify_email_unconfirmed then
 		address = self.notify_email_unconfirmed
 	else
 		address = self.notify_email
@@ -467,7 +467,6 @@ function Member.object:send_invitation(template_file, subject)
   local success = net.send_mail{
     envelope_from = config.mail_envelope_from,
     from          = config.mail_from,
---    reply_to      = config.mail_reply_to,
     to            = address,
     subject       = subject,
     content_type  = "text/plain; charset=UTF-8",
