@@ -35,7 +35,7 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
 
 
         local active
-        if not member.activated then
+        if not member.active then
           active=_"Not activated"
         elseif not member.active then
           active= _"INACTIVE"
@@ -135,7 +135,6 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
       ui.link{
         attr = { class="btn btn-primary proc_btn fixclick"  },
         module = "auditor",
-        view = "index",
         action = "generate_new_invite_code",
         id = member.id,
         content = function()

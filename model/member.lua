@@ -428,6 +428,10 @@ end
 
 function Member.object:send_invitation(template_file, subject)
   trace.disable()
+  self.invite_code = ""
+  self.invite_code_expiry = db:query("SELECT now()","object").expiry 
+  self:save()
+  
   self.invite_code = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
   self.invite_code_expiry = db:query("SELECT now() + '1 days'::interval as expiry", "object").expiry
   self:save()
@@ -452,12 +456,18 @@ function Member.object:send_invitation(template_file, subject)
       slot.put(self.invite_code .. "\n\nBest wishes.\n\nParelon Team")
     end)
   end
-
+  
+	local address
+	if self.notify_email_unconfirmed then
+		address = self.notify_email_unconfirmed
+	else
+		address = self.notify_email
+	end
+	
   local success = net.send_mail{
     envelope_from = config.mail_envelope_from,
     from          = config.mail_from,
-    reply_to      = config.mail_reply_to,
-    to            = #self.notify_email_unconfirmed>0 and self.notify_email_unconfirmed or self.notify_email,
+    to            = address,
     subject       = subject,
     content_type  = "text/plain; charset=UTF-8",
     content       = content
