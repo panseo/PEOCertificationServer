@@ -15,7 +15,7 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
     action = 'register',
     params = {
       code = code,
-      notify_email = notify_email,
+      notify_email = notify_email_uniconfirmed,
       login = login
     },
     content = function()
@@ -97,7 +97,7 @@ ui.container{ attr = { class = "row-fluid" }, content = function()
                   attr={class="auditor_input",placeholder=_"Email address"},
                   label     = _'Email address',
                   name      = 'notify_email',
-                  value     = param.get("notify_email") or member.notify_email
+                  value     = param.get("notify_email") or member.notify_email_unconfirmed
                 }
               end }
             end }

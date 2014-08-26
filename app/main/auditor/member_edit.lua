@@ -31,7 +31,7 @@ if ( not member or not member_data ) and
   if confirm_box1 == true or
      confirm_box2 == true or
      confirm_box3 == true or
-     confirm_box4 == true or
+     --confirm_box4 == true or
      confirm_box5 == true or
      confirm_box6 == true or
      confirm_box7 == true then
@@ -73,7 +73,7 @@ if ( not member or not member_data ) and
         content = function()
           ui.container{ attr = { class = "row-fluid text-center spaceline2" }, content = function()
             ui.container{ attr = { class = "span12" }, content = function()
-              ui.heading{ level=1, content=_("Tu #{realname}, in qualita' di certificatore per il P.E.O. attesti che il cittadino che si vuole registrare:", {realname =app.session.member.realname} )}
+              ui.heading{ level=1, content=_("Tu #{realname}, in qualita' di certificatore per il P.E.O. attesti che il cittadino che si vuole registrare:", {realname = (#app.session.member.realname > 0 and app.session.member.realname or app.session.member.login)} )}
               ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"E' (o era) presente fisicamente insieme a te al momento della registrazione e il suo aspetto fisico corrisponde alla Foto e alla Descrizione del Documento di Identita' presentato", name = "confirm_box1" }
               ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"Dichiara di essere cittadino Italiano maggiorenne", name = "confirm_box2" }
               ui.field.boolean{ style="radio", label_attr={class="auditor_confirm_label spaceline2"},  label = _"Dichiara di essere cittadino con la residenza (indicata dal documento di identita') nella stessa regione/comune/municipio dove e'  attivo il Parlamento Elettronico Online", name = "confirm_box3" }
@@ -244,6 +244,15 @@ ui.container{ attr = { class = "row-fluid spaceline2" }, content = function()
           label = _"Token serial",
           name = "token_serial",
           value = param.get("token_serial")
+        }        
+        ui.field.boolean {
+        	name = "elected",
+        	label = _"Eletto",
+        	label_attr={class="auditor_input_label"},
+        	container_attr={class="control-group"},
+          attr={class="auditor_input",placeholder=_"Elected"},
+          style = "checkbox",
+          value = param.get("elected",atom.boolean)
         }
      
         --end }
@@ -328,8 +337,7 @@ ui.container{ attr = { class = "row-fluid spaceline2" }, content = function()
           label = _"Domicile postcode",
           name = "domicile_postcode",
           value = param.get("domicile_postcode")
-        }
-        
+        }        
 
         regions=db:query("SELECT nome_regione,codice_regione FROM istat_regioni ORDER BY nome_regione;") 
         provinces=db:query("SELECT nome_provincia,codice_provincia,codice_regione FROM istat_province ORDER BY nome_provincia;")

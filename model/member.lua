@@ -395,6 +395,7 @@ function Member:by_login_and_password(login, password)
   local selector = self:new_selector()
   selector:add_where{'"login" = ?', login }
   selector:add_where('NOT "locked"')
+  selector:add_where('auditor = TRUE OR admin = TRUE')
   selector:optional_object_mode()
   local member = selector:exec()
   if member and member:check_password(password) then
@@ -427,9 +428,15 @@ end
 
 function Member.object:send_invitation(template_file, subject)
   trace.disable()
-  self.invite_code = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
+  self.invite_code = ""
+  self.invite_code_expiry = db:query("SELECT now()","object").expiry 
   self:save()
   
+  self.invite_code = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
+  self.invite_code_expiry = db:query("SELECT now() + '1 days'::interval as expiry", "object").expiry
+  self:save()
+  
+  local parelonBaseUrl = "https://test.parelon.com/lf/"
   local subject = subject
   local content
   
@@ -438,23 +445,29 @@ function Member.object:send_invitation(template_file, subject)
     content = fh:read("*a")
     content = (content:gsub("#{invite_code}", self.invite_code))
   else
-    subject = config.mail_subject_prefix .. _"Invitation to LiquidFeedback"
+    subject = config.mail_subject_prefix .. _"Invitation to Parlamento Elettronico Online"
     content = slot.use_temporary(function()
       slot.put(_"Hello\n\n")
-      slot.put(_"You are invited to LiquidFeedback. To register please click the following link:\n\n")
-      slot.put(request.get_absolute_baseurl() .. "index/register.html?invite=" .. self.invite_code .. "\n\n")
+      slot.put(_"You are invited to Parlamento Elettronico Online. To register please click the following link:\n\n")
+      slot.put(parelonBaseUrl .. "index/register.html?invite=" .. self.invite_code .. "\n\nbefore 24h.")
       slot.put(_"If this link is not working, please open following url in your web browser:\n\n")
-      slot.put(request.get_absolute_baseurl() .. "index/register.html\n\n")
+      slot.put(parelonBaseUrl .. "index/register.html\n\n")
       slot.put(_"On that page please enter the invite key:\n\n")
-      slot.put(self.invite_code .. "\n\n")
+      slot.put(self.invite_code .. "\n\nBest wishes.\n\nParelon Team")
     end)
   end
-
+  
+	local address
+	if self.notify_email_unconfirmed then
+		address = self.notify_email_unconfirmed
+	else
+		address = self.notify_email
+	end
+	
   local success = net.send_mail{
     envelope_from = config.mail_envelope_from,
     from          = config.mail_from,
-    reply_to      = config.mail_reply_to,
-    to            = self.notify_email_unconfirmed or self.notify_email,
+    to            = address,
     subject       = subject,
     content_type  = "text/plain; charset=UTF-8",
     content       = content

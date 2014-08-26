@@ -4,7 +4,7 @@
 
 -- Name of this instance, defaults to name of config file
 -- ------------------------------------------------------------------------
-config.instance_name = "Parlamento Elettronico Movimento Cinque Stelle"
+config.instance_name = "Parlamento Elettronico Online"
 
 
 -- Information about service provider (HTML)
@@ -79,7 +79,7 @@ config.use_terms_checkboxes = {
   
 -- Absolute base url of application
 -- ------------------------------------------------------------------------
-config.absolute_base_url = "/cert"
+config.absolute_base_url = "https://test.parelon.com/cert"
 
 
 -- Connection information for the LiquidFeedback database
@@ -150,12 +150,14 @@ config.default_lang = "it"
 
 -- Prefix of all automatic mails, defaults to "[Liquid Feedback] "
 -- ------------------------------------------------------------------------
-config.mail_subject_prefix = "Parlamento Elettronico M5S "
+config.mail_subject_prefix = "Parlamento Elettronico Online "
 
 -- Sender of all automatic mails, defaults to system defaults
 -- ------------------------------------------------------------------------
 -- config.mail_envelope_from = "liquidfeedback@example.com"
-config.mail_from = { name = "Parlamento Elettronico M5S", address = "liquidfeedback@example.com" }
+config.mail_envelope_from = "info@parelon.com"
+
+config.mail_from = { name = "Parlamento Elettronico Online", address = "info@parelon.com" }
 -- config.mail_reply_to = { name = "Support", address = "support@example.com" }
 
 -- Configuration of password hashing algorithm (defaults to "crypt_sha512")
